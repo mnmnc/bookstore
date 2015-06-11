@@ -1,0 +1,37 @@
+D:\dev\python\bdd>behave bookstore/bookstore.feature
+Feature: Book rent # bookstore\bookstore.feature:1
+
+  Scenario: rent successful                        # bookstore\bookstore.feature:3
+    Given user1 rent counter is equal 0            # bookstore\steps\bookstore.py:12
+    And user1 BookStore Card is valid              # bookstore\steps\bookstore.py:15
+    And the selected book1 is available            # bookstore\steps\bookstore.py:18
+    When user1 wants to rent the selected book1    # bookstore\steps\bookstore.py:22
+    Then the selected book1 is rent to the user1   # bookstore\steps\bookstore.py:26
+    And the book1 is added to the users1 rent list # bookstore\steps\bookstore.py:29
+    And user1 rent counter is incremented          # bookstore\steps\bookstore.py:32
+    And book1 return date is set to 14 days        # bookstore\steps\bookstore.py:35
+
+  Scenario: rent failed - rent limit exceeded          # bookstore\bookstore.feature:13
+    Given user2 rent counter is equal 5                # bookstore\steps\bookstore.py:44
+    And user2 BookStore Card is valid                  # bookstore\steps\bookstore.py:47
+    And the selected book2 is available                # bookstore\steps\bookstore.py:50
+    When user2 wants to rent the selected book2        # bookstore\steps\bookstore.py:54
+    Then the selected book2 is NOT rent to the user2   # bookstore\steps\bookstore.py:58
+    And the book2 is NOT added to the users2 rent list # bookstore\steps\bookstore.py:61
+    And alert info is displayed to user2               # bookstore\steps\bookstore.py:64
+    And user2 rent counter is NOT incremented          # bookstore\steps\bookstore.py:67
+
+  Scenario: rent failed - invalid BookStore Card       # bookstore\bookstore.feature:24
+    Given user3 rent counter is equal 0                # bookstore\steps\bookstore.py:76
+    And user3 BookStore Card is NOT valid              # bookstore\steps\bookstore.py:79
+    And the selected book3 is available                # bookstore\steps\bookstore.py:82
+    When user3 wants to rent the selected book3        # bookstore\steps\bookstore.py:86
+    Then the selected book3 is NOT rent to the user3   # bookstore\steps\bookstore.py:90
+    And the book3 is NOT added to the users3 rent list # bookstore\steps\bookstore.py:93
+    And alert info is displayed to user3               # bookstore\steps\bookstore.py:96
+    And user3 rent counter is NOT incremented          # bookstore\steps\bookstore.py:99
+
+1 feature passed, 0 failed, 0 skipped
+3 scenarios passed, 0 failed, 0 skipped
+24 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m0.012s

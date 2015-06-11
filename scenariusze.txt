@@ -1,0 +1,41 @@
+========== SCENARIUSZ 1: ==========
+"Wypo¿yczenie zakoñczone sukcesem"
+Given:
+* Licznik aktualnie wypo¿yczonych ksi¹¿ek czytelnika: 0
+* Karta biblioteczna jest wa¿na
+* ¯¹dana ksi¹¿ka jest dostêpna do wypo¿yczenia
+When:
+* Czytelnik chce wypo¿yczyæ ksi¹¿kê
+Then:
+* Ksi¹¿ka zostaje wypo¿yczona
+* Ksi¹¿ka zostaje dopisana do listy ksi¹¿ek aktualnie w wypo¿yczeniu przez czytelnika 
+* Licznik aktualnie wypo¿yczonych ksi¹¿ek czytelnika zmianiany jest na: 1
+* Termin zwrotu zostaje ustawiony na 14 dni od daty bie¿¹cej
+
+
+========== SCENARIUSZ 2: ==========
+"Wypo¿yczenie niemo¿liwe - za du¿o ksi¹¿ek aktualnie wypo¿yczonych przez danego czytelnika"
+Given:
+* Licznik aktualnie wypo¿yczonych ksi¹¿ek czytelnika: 5
+* Karta biblioteczna jest wa¿na
+* ¯¹dana ksi¹¿ka jest dostêpna do wypo¿yczenia
+When:
+* Czytelnik chce wypo¿yczyæ kolejn¹ ksi¹¿kê
+Then:
+* Ksi¹¿ka nie zostaje wypo¿yczona
+* Wyœwietlony zostaje komunikat o przekroczonej liczbie jednoczeœnie wypo¿yczonych ksi¹¿ek (maks. 5) 
+* Wyœwietlony zostaje równie¿ komunikat z proœb¹ o zwrot pozosta³ych pozycji z wyœwietleniem listy i weryfikacj¹ terminów wypo¿yczeñ
+* Licznik aktualnie wypo¿yczonych ksi¹¿ek czytelnika nie zmienia siê
+
+
+========== SCENARIUSZ 3: ==========
+"Wypo¿yczenie niemo¿liwe - niewa¿na karta biblioteczna"
+Given:
+* Licznik aktualnie wypo¿yczonych ksi¹¿ek czytelnika: 0
+* Karta biblioteczna jest niewa¿na
+* ¯¹dana ksi¹¿ka jest dostêpna do wypo¿yczenia
+When:
+* Czytelnik chce wypo¿yczyæ ksi¹¿kê
+Then:
+* Ksi¹¿ka nie zostaje wypo¿yczona
+* Wyœwietlony zostaje komunikat o up³ywie terminu wa¿noœci karty oraz koniecznoœci jej przed³u¿enia
